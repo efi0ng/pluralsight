@@ -1,6 +1,6 @@
 {
-  "name": "ipc-demo",
-  "productName": "Electron Fundamentals",
+  "name": "child-proc",
+  "productName": "Electron Fundamentals: Child Processes",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
