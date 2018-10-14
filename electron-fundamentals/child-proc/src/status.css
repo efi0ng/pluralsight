@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  background: #b8d9e9;
+}
+body {
+  overflow: hidden;
+  padding: 0 15px;
+  margin: 0;
+}
+.container {
+  display: flex;
+  margin: 20px 5px;
+  flex-wrap: wrap;
+  height: 100vh;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+.input {
+  flex: 1;
+  height: 36px;
+  border: 1px solid #ababab;
+  border-radius: 3px;
+  background: #fff;
+  font-size: 20px;
+  padding: 0 10px;
+}
+.status {
+  display: inline-block;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+.output {
+}
+.unknown {
+  background: gray;
+}
+.clean {
+  background: green;
+}
+.dirty {
+  background: red;
+}
