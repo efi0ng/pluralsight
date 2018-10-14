@@ -1,0 +1,18 @@
+{
+  "name": "ipc-demo",
+  "productName": "Electron Fundamentals",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "efi0ng",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-prebuilt": "^1.4.13",
+    "eslint": "^5.7.0"
+  }
+}
