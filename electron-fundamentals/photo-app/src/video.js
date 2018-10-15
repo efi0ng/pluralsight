@@ -22,7 +22,7 @@ function init(navigator, videoEl) {
 
 function captureBytes(videoEl, ctx, canvasEl) {
   ctx.drawImage(videoEl, 0, 0);
-  return canvasEl.toDataURL('image/png');
+  return canvasEl.toDataURL('image/webp');
 }
 
 module.exports = {
