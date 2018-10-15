@@ -11,7 +11,6 @@ function init(navigator, videoEl) {
     }
   };
 
-//navigator.webkitGetUserMedia(constraints)
   navigator.mediaDevices.getUserMedia(constraints)
   .then(function(stream) {
     videoEl.srcObject = stream;
@@ -23,7 +22,6 @@ function init(navigator, videoEl) {
 
 function captureBytes(videoEl, ctx, canvasEl) {
   ctx.drawImage(videoEl, 0, 0);
-  console.log(videoEl);
   return canvasEl.toDataURL('image/png');
 }
 
