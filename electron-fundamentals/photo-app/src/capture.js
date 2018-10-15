@@ -1,4 +1,4 @@
-//navigator.getUserMedia =  navigator.webkitGetUserMedia;
+const video = require('./video.js');
 
 window.addEventListener('DOMContentLoaded', () => {
   const videoEl = document.getElementById('video');
@@ -7,23 +7,5 @@ window.addEventListener('DOMContentLoaded', () => {
   const photosEl = document.querySelector('.photosContainer');
   const counterEl = document.getElementById('counter');
 
-  let constraints = {
-    audio: false,
-    video: {
-      mandatory:{
-        minWidth: 853,
-        minHeight: 480,
-        maxWidth: 853,
-        maxHeight: 480
-      }
-    }
-  };
-
-  navigator.mediaDevices.getUserMedia(constraints)
-  .then(function(stream) {
-    videoEl.src = window.URL.createObjectURL(stream);
-  })
-  .catch(function(error) {
-    console.log('Camera error: ', error);
-  });
+  video.init(navigator, videoEl);
 });
