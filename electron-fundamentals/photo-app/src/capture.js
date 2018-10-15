@@ -27,6 +27,5 @@ window.addEventListener('DOMContentLoaded', () => {
   recordEl.addEventListener('click', () => {
     const bytes = video.captureBytes(videoEl, ctx, canvasEl);
     photosEl.appendChild(formatImgTag(document, bytes));
-
   });
 });
