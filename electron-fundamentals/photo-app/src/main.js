@@ -15,5 +15,5 @@ app.on('ready', () => {
 
   mainWindow.on('close', () => {
     mainWindow = null;
-  })
+  });
 });
