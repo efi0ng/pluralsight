@@ -11,7 +11,7 @@ app.on('ready', () => {
 
   mainWindow.openDevTools();
 
-  mainWindow.loadURL(`file://${__dirname}/capture.html`);
+  mainWindow.loadURL(`file://${__dirname}/sample.html`);
 
   mainWindow.on('close', () => {
     mainWindow = null;

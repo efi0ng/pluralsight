@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="./capture.css" />
+</head>
+<body>
+<video id="screenshot-video" autoplay></video>
+<img id="screenshot-img" src="">
+<!--<canvas style="display:none;"></canvas>-->
+<button id="capture-button">Capture Video</button>
+<div id="photos"  class="photosContainer">
+<button id="screenshot-button">Take Screenshot</button>
+</div>
+<script type="text/javascript">
+const captureVideoButton = document.querySelector('#capture-button');
+const screenshotButton = document.querySelector('#screenshot-button');
+const img = document.querySelector('#screenshot-img');
+const video = document.querySelector('#screenshot-video');
+const screenshotDiv = document.getElementById('photos')
+const canvas = document.createElement('canvas');
+
+function formatImgTag(doc, bytes) {
+  const div = doc.createElement('div');
+  div.classList.add('photo');
+  const close = doc.createElement('div');
+  close.classList.add('photoClose');
+  const img = new Image();
+  img.classList.add('photoImg');
+  img.src = bytes;
+  div.appendChild(img);
+  div.appendChild(close);
+  return div;
+}
+
+let constraints = {
+  audio: false,
+  video: {
+    width:{ exact: 853 },
+    height: {exact: 480 }
+  }
+};
+
+captureVideoButton.onclick = function() {
+  navigator.mediaDevices.getUserMedia(constraints).
+    then(handleSuccess).catch(handleError);
+};
+
+screenshotButton.onclick = video.onclick = function() {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  // Other browsers will fall back to image/png
+  //img.src = canvas.toDataURL('image/webp');
+  screenshotDiv.appendChild(formatImgTag(document, canvas.toDataURL('image/webp')));
+};
+
+function handleSuccess(stream) {
+  screenshotButton.disabled = false;
+  video.srcObject = stream;
+}
+
+function handleError(error) {
+  console.error('Error: ', error);
+}
+
+</script>
+</body>
+</html>

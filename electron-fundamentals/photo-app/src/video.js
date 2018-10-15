@@ -2,12 +2,8 @@ function init(navigator, videoEl) {
   let constraints = {
     audio: false,
     video: {
-      mandatory:{
-        minWidth: 853,
-        minHeight: 480,
-        maxWidth: 853,
-        maxHeight: 480
-      }
+      width:  { exact: 853 },
+      height: { exact: 480 }
     }
   };
 
