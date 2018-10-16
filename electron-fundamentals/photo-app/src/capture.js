@@ -1,5 +1,6 @@
 const video = require('./video.js');
 const countdown = require('./countdown.js');
+const { ipcRenderer: ipc } = require('electron');
 
 function formatImgTag(doc, bytes) {
   const div = doc.createElement('div');
@@ -28,6 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
   recordEl.addEventListener('click', () => {
     countdown.start(counterEl, 3, () => {
       const bytes = video.captureBytes(videoEl, ctx, canvasEl);
+      ipc.send('image-captured', bytes);
       photosEl.appendChild(formatImgTag(document, bytes));
     });
   });

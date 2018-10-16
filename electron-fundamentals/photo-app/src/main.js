@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain: ipc } = require('electron');
+const images = require('./images.js');
 
 let mainWindow = null;
 
@@ -9,11 +10,16 @@ app.on('ready', () => {
       resizable: false
   });
 
+  mainWindow.loadURL(`file://${__dirname}/capture.html`);
   mainWindow.openDevTools();
 
-  mainWindow.loadURL(`file://${__dirname}/capture.html`);
+  images.init(app);
 
   mainWindow.on('close', () => {
     mainWindow = null;
   });
+});
+
+ipc.on('image-captured', (evt, bytes) => {
+  images.save(bytes);
 });
