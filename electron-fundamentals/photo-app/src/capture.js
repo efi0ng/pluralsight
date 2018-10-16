@@ -34,6 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const counterEl = document.getElementById('counter');
   const flashEl = document.getElementById('flash');
 
+  /*global Seriously */
   seriously = new Seriously();
   videoSrc = seriously.source('#video');
   canvasTarget = seriously.target('#canvas');
@@ -69,4 +70,8 @@ window.addEventListener('DOMContentLoaded', () => {
 ipc.on('image-removed', (evt, index) => {
   let photos = Array.from(document.querySelectorAll('.photo'));
   document.getElementById('photos').removeChild(photos[index]);
+});
+
+ipc.on(effects.EffectMessages.EFFECT_CHOOSE, (evt, effectName) => {
+  effects.choose(seriously, videoSrc, canvasTarget, effectName);
 });

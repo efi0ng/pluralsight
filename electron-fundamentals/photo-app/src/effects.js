@@ -22,5 +22,8 @@ function choose(seriously, src, target, effectName = EffectNames.vanilla) {
 
 module.exports = {
   choose: choose,
-  EffectNames: EffectNames
+  EffectNames: EffectNames,
+  EffectMessages: {
+    EFFECT_CHOOSE : 'effect-choose'
+  }
 };
