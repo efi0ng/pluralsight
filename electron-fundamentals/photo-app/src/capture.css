@@ -142,5 +142,5 @@ body {
   100% { background: rgba(255, 255, 255, 0); }
 }
 .is-flashing {
-  animation: 2s ease-out 0s 1 flashing;
+  animation: 1.5s ease-out 0s 1 flashing;
 }

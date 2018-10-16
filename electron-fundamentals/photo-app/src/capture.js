@@ -1,5 +1,7 @@
-const video = require('./video.js');
-const countdown = require('./countdown.js');
+const video = require('./video');
+const countdown = require('./countdown');
+const flash = require('./flash');
+
 const { ipcRenderer: ipc, shell, remote } = require('electron');
 
 const images = remote.require('./images');
@@ -23,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const recordEl = document.getElementById('record');
   const photosEl = document.querySelector('.photosContainer');
   const counterEl = document.getElementById('counter');
+  const flashEl = document.getElementById('flash');
 
   const ctx = canvasEl.getContext('2d');
 
@@ -30,6 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   recordEl.addEventListener('click', () => {
     countdown.start(counterEl, 3, () => {
+      flash(flashEl);
       const bytes = video.captureBytes(videoEl, ctx, canvasEl);
       ipc.send('image-captured', bytes);
       photosEl.appendChild(formatImgTag(document, bytes));
