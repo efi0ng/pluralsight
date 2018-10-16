@@ -2,6 +2,11 @@ const path = require('path');
 const fs = require('fs');
 
 let photosPath = null;
+let imagePaths = [];
+
+function getPhotosPath() {
+  return photosPath;
+}
 
 function getPicturesDir(app) {
   return path.join(app.getPath('pictures'),"photo-app");
@@ -38,12 +43,24 @@ function save(bytes) {
   fs.writeFile(fileName, base64data, {
     encoding: 'base64'
   }, (err) => {
+    if (!err) {
+      addToCache(fileName);
+    }
     logFileCallback(fileName, err);
   });
+}
+
+function addToCache(imgPath) {
+  imagePaths.push(imgPath);
+}
+
+function getFromCache(index) {
+  return imagePaths[index];
 }
 
 module.exports = {
   init: init,
   save: save,
-  getPicturesDir: getPicturesDir
+  getPhotosPath: getPhotosPath,
+  getFromCache: getFromCache
 };

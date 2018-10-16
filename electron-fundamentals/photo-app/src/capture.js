@@ -1,6 +1,8 @@
 const video = require('./video.js');
 const countdown = require('./countdown.js');
-const { ipcRenderer: ipc } = require('electron');
+const { ipcRenderer: ipc, shell, remote } = require('electron');
+
+const images = remote.require('./images');
 
 function formatImgTag(doc, bytes) {
   const div = doc.createElement('div');
@@ -32,5 +34,12 @@ window.addEventListener('DOMContentLoaded', () => {
       ipc.send('image-captured', bytes);
       photosEl.appendChild(formatImgTag(document, bytes));
     });
+  });
+
+  photosEl.addEventListener('click', evt => {
+    const photos = Array.from(document.querySelectorAll('.photoImg'));
+    const index = photos.findIndex(el => el === evt.target);
+
+    shell.showItemInFolder(images.getFromCache(index));
   });
 });
