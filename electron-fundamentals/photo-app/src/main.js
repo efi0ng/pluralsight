@@ -23,3 +23,9 @@ app.on('ready', () => {
 ipc.on('image-captured', (evt, bytes) => {
   images.save(bytes);
 });
+
+ipc.on('image-remove', (evt, index) => {
+  images.remove(index, () => {
+    evt.sender.send('image-removed', index);
+  });
+});

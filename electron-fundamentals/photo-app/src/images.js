@@ -50,6 +50,15 @@ function save(bytes) {
   });
 }
 
+function remove(index, done) {
+  fs.unlink(imagePaths[index], err => {
+    if (err) return logFileCallback(imagePaths[index], err);
+
+    imagePaths.splice(index, 1);
+    done();
+  });
+}
+
 function addToCache(imgPath) {
   imagePaths.push(imgPath);
 }
@@ -61,6 +70,7 @@ function getFromCache(index) {
 module.exports = {
   init: init,
   save: save,
+  remove: remove,
   getPhotosPath: getPhotosPath,
   getFromCache: getFromCache
 };

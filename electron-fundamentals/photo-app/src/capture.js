@@ -37,9 +37,22 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   photosEl.addEventListener('click', evt => {
-    const photos = Array.from(document.querySelectorAll('.photoImg'));
+    const isPhotoClose = evt.target.classList.contains('photoClose');
+    const selector = isPhotoClose ? '.photoClose' : '.photoImg';
+    const photos = Array.from(document.querySelectorAll(selector));
     const index = photos.findIndex(el => el === evt.target);
 
-    shell.showItemInFolder(images.getFromCache(index));
+    if (index == -1) return;
+
+    if (isPhotoClose) {
+      ipc.send('image-remove', index);
+    } else {
+      shell.showItemInFolder(images.getFromCache(index));
+    }
   });
+});
+
+ipc.on('image-removed', (evt, index) => {
+  let photos = Array.from(document.querySelectorAll('.photo'));
+  document.getElementById('photos').removeChild(photos[index]);
 });
