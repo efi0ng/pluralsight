@@ -21,7 +21,12 @@ function captureBytes(videoEl, ctx, canvasEl) {
   return canvasEl.toDataURL('image/png');
 }
 
+function captureBytesFromLiveCanvas(canvasEl) {
+  return canvasEl.toDataURL('image/png');
+}
+
 module.exports = {
   init: init,
-  captureBytes : captureBytes
+  captureBytes : captureBytes,
+  captureBytesFromLiveCanvas : captureBytesFromLiveCanvas
 };
