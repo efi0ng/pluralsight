@@ -24,6 +24,7 @@ module.exports = {
   choose: choose,
   EffectNames: EffectNames,
   EffectMessages: {
-    EFFECT_CHOOSE : 'effect-choose'
+    EFFECT_CHOOSE : 'effect-choose',
+    EFFECT_CYCLE : 'effect-cycle'
   }
 };
