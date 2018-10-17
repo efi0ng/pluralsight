@@ -1,10 +1,25 @@
 const EffectNames = {
   vanilla: "vanilla",
-  ascii: "ascii"
+  ascii: "ascii",
+  daltonize: "daltonize",
+  hex: "hex"
 };
 
 const  EffectMessages = {
   EFFECT_CHOOSE : 'effect-choose',
+};
+
+const effectFn = function (effectName, customFn) {
+  return (seriously, src, target) => {
+    // construct
+    const effect = seriously.effect(effectName);
+    // customise
+    if (customFn) customFn(effect);
+    // connect
+    effect.source = src;
+    target.source = effect;
+    seriously.go();
+  };
 };
 
 const effects = {
@@ -12,12 +27,9 @@ const effects = {
     target.source = src;
     seriously.go();
   },
-  ascii: (seriously, src, target ) => {
-    const ascii = seriously.effect('ascii');
-    ascii.source = src;
-    target.source = ascii;
-    seriously.go();
-  }
+  ascii: effectFn(EffectNames.ascii, null),
+  daltonize: effectFn(EffectNames.daltonize, effect => { effect.type = 0.8; }),
+  hex: effectFn(EffectNames.hex, effect => { effect.size = 0.01; })
 };
 
 function choose(seriously, src, target, effectName = EffectNames.vanilla) {
@@ -48,6 +60,15 @@ function makeEffectsMenu(mainWindow) {
     mainWindow.webContents.send(EffectMessages.EFFECT_CHOOSE, effect);
   }
 
+  function effectMenuItem(label, effect, checked =false) {
+    return {
+      label: label,
+      effect: effect,
+      type: 'radio',
+      checked: checked,
+      click: onEffectItemClick
+    };
+  }
   return {
     label: 'Effects',
     submenu: [
@@ -59,19 +80,10 @@ function makeEffectsMenu(mainWindow) {
       {
         type: 'separator'
       },
-      {
-        label: 'Vanilla',
-        effect: EffectNames.vanilla,
-        type: 'radio',
-        click: onEffectItemClick
-      },
-      {
-        label: 'Ascii baby',
-        effect: EffectNames.ascii,
-        type: 'radio',
-        checked: true,
-        click: onEffectItemClick
-      }
+      effectMenuItem('Vanilla', EffectNames.vanilla),
+      effectMenuItem('Ascii baby',EffectNames.ascii, true),
+      effectMenuItem('Daltonize', EffectNames.daltonize),
+      effectMenuItem('Hex', EffectNames.hex)
     ]
   };
 }
