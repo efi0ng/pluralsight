@@ -80,8 +80,8 @@ function makeEffectsMenu(mainWindow) {
       {
         type: 'separator'
       },
-      effectMenuItem('Vanilla', EffectNames.vanilla),
-      effectMenuItem('Ascii baby',EffectNames.ascii, true),
+      effectMenuItem('Vanilla', EffectNames.vanilla, true),
+      effectMenuItem('Ascii baby',EffectNames.ascii),
       effectMenuItem('Daltonize', EffectNames.daltonize),
       effectMenuItem('Hex', EffectNames.hex)
     ]

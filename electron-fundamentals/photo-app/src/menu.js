@@ -20,14 +20,6 @@ function makeMenuTemplate(mainWindow) {
         type: 'separator'
       },
       {
-        label: 'Hide ' + name,
-        accelerator: 'CommandOrControl+H',
-        role: 'hide'
-      },
-      {
-        type: 'separator'
-      },
-      {
         label: 'Quit',
         accelerator:'CommandOrControl+Q',
         role: 'quit'
