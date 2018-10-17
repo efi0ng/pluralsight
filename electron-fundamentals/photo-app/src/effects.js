@@ -2,7 +2,8 @@ const EffectNames = {
   vanilla: "vanilla",
   ascii: "ascii",
   daltonize: "daltonize",
-  hex: "hex"
+  hex: "hex",
+  filmgrain: "filmgrain"
 };
 
 const  EffectMessages = {
@@ -22,18 +23,19 @@ const effectFn = function (effectName, customFn) {
   };
 };
 
-const effects = {
+const Effects = {
   vanilla: (seriously, src, target ) => {
     target.source = src;
     seriously.go();
   },
   ascii: effectFn(EffectNames.ascii, null),
   daltonize: effectFn(EffectNames.daltonize, effect => { effect.type = 0.8; }),
-  hex: effectFn(EffectNames.hex, effect => { effect.size = 0.01; })
+  hex: effectFn(EffectNames.hex, effect => { effect.size = 0.01; }),
+  filmgrain: effectFn(EffectNames.filmgrain, effect => { effect.amount = 0.3; })
 };
 
 function choose(seriously, src, target, effectName = EffectNames.vanilla) {
-  effects[effectName](seriously, src, target);
+  Effects[effectName](seriously, src, target);
 }
 
 function cycleToNextEffect(menu) {
@@ -83,7 +85,8 @@ function makeEffectsMenu(mainWindow) {
       effectMenuItem('Vanilla', EffectNames.vanilla, true),
       effectMenuItem('Ascii baby',EffectNames.ascii),
       effectMenuItem('Daltonize', EffectNames.daltonize),
-      effectMenuItem('Hex', EffectNames.hex)
+      effectMenuItem('Hex', EffectNames.hex),
+      effectMenuItem('Film grain', EffectNames.filmgrain)
     ]
   };
 }
