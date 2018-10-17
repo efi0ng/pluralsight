@@ -1,5 +1,6 @@
 const { app } = require('electron');
 const { makeEffectsMenu } = require('./effects');
+const images = require('./images');
 
 function makeMenuTemplate(mainWindow) {
   const name = app.getName();
@@ -36,6 +37,13 @@ function makeMenuTemplate(mainWindow) {
 
   template.push(makeEffectsMenu(mainWindow));
 
+  template.push({
+    label: 'View',
+    submenu: [{
+      label: 'Photos Directory',
+      click: () => { images.openPhotosDir(); }
+    }]
+  });
   return template;
 }
 

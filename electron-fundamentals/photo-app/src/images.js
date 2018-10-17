@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const shell = require('electron').shell;
 
 let photosPath = null;
 let imagePaths = [];
@@ -67,12 +68,18 @@ function getFromCache(index) {
   return imagePaths[index];
 }
 
+function openPhotosDir() {
+  if (!photosPath) return;
+  shell.showItemInFolder(path.join(photosPath,"myFakeFile"));
+}
+
 module.exports = {
   init: init,
   save: save,
   remove: remove,
   getPhotosPath: getPhotosPath,
   getFromCache: getFromCache,
+  openPhotosDir: openPhotosDir,
   Messages: {
     IMAGE_CAPTURED: 'image-captured',
     IMAGE_REMOVE: 'image-remove'
