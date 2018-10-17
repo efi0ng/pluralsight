@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
     countdown.start(counterEl, 3, () => {
       flash(flashEl);
       const bytes = video.captureBytesFromLiveCanvas(canvasEl);
-      ipc.send('image-captured', bytes);
+      ipc.send(images.Messages.IMAGE_CAPTURED, bytes);
       photosEl.appendChild(formatImgTag(document, bytes));
     });
   });
@@ -67,7 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-ipc.on('image-removed', (evt, index) => {
+ipc.on(images.Messages.IMAGE_REMOVE, (evt, index) => {
   let photos = Array.from(document.querySelectorAll('.photo'));
   document.getElementById('photos').removeChild(photos[index]);
 });

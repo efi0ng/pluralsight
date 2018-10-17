@@ -72,5 +72,9 @@ module.exports = {
   save: save,
   remove: remove,
   getPhotosPath: getPhotosPath,
-  getFromCache: getFromCache
+  getFromCache: getFromCache,
+  Messages: {
+    IMAGE_CAPTURED: 'image-captured',
+    IMAGE_REMOVE: 'image-remove'
+  }
 };

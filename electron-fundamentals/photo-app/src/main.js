@@ -23,11 +23,11 @@ app.on('ready', () => {
   Menu.setApplicationMenu(menu);
 });
 
-ipc.on('image-captured', (evt, bytes) => {
+ipc.on(images.Messages.IMAGE_CAPTURED, (evt, bytes) => {
   images.save(bytes);
 });
 
-ipc.on('image-remove', (evt, index) => {
+ipc.on(images.Messages.IMAGE_REMOVE, (evt, index) => {
   images.remove(index, () => {
     evt.sender.send('image-removed', index);
   });
